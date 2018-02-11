@@ -1,0 +1,38 @@
+{
+    "name": "egg-blog",
+    "version": "1.0.0",
+    "description": "NodeJS, Blog, Egg, Vue, MongoDB",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "dependencies": {
+        "egg": "^2.3.0"
+    },
+    "devDependencies": {
+        "cz-conventional-changelog": "^2.1.0",
+        "egg-bin": "^4.3.7"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "egg-bin dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@git.coding.net:sublimeCT/egg-blog.git"
+    },
+    "keywords": [
+        "egg",
+        "&",
+        "vue",
+        "&",
+        "MongoDB"
+    ],
+    "author": "sven",
+    "license": "MIT",
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}
