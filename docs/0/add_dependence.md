@@ -8,7 +8,7 @@
 ```bash
 # 需要先全局安装 yarn
 yarn global add commitizen
-npm init
+yarn init
 commitizen init cz-conventional-changelog --save --save-exact
 # 与 npm install --save egg 相同
 yarn add egg

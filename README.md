@@ -1,5 +1,9 @@
 # egg-blog
 
+## 开发环境
+- Deepin 15.5 unstable
+- vscode
+
 ## Notes
 - 项目初始化
     - [Git 环境](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/built_git_env.md)
