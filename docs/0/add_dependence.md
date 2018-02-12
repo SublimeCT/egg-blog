@@ -1,8 +1,9 @@
 # 添加依赖
 ## 依赖 list
-- yarn 包管理工具
-- commitizen `commit message` 格式化工具 [Angular 规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
-- egg-bin
+- `yarn` 包管理工具
+- `commitizen` 一个 `commit message` 格式化工具 [Angular 规范](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+- `egg` Egg 框架
+- `egg-bin`
 
 ## 安装
 ```bash
