@@ -1,3 +1,9 @@
+# API 整理
+
+## restful API
+使用 `Egg` 自带的 `resource`
+```javascript
+// app/router.js
 module.exports = app => {
     const {router, controller} = app
     // test
@@ -6,7 +12,8 @@ module.exports = app => {
     router.resource('users', controller.user)
     router.resource('articles', controller.article)
     router.resource('roles', controller.role)
-    // frontend API
-    router.post('/user/regist', controller.user.regist) // 注册
-    router.post('/user/login', controller.user.login) // 登录
 }
+```
+
+### 构建响应 controller
+参照 [文档](https://eggjs.org/zh-cn/basics/router.html#restful-风格的-url-定义)

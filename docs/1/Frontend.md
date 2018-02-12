@@ -1,3 +1,7 @@
+# 前台页面 API
+
+加入 `frontend API`
+```javascript
 module.exports = app => {
     const {router, controller} = app
     // test
@@ -10,3 +14,4 @@ module.exports = app => {
     router.post('/user/regist', controller.user.regist) // 注册
     router.post('/user/login', controller.user.login) // 登录
 }
+```

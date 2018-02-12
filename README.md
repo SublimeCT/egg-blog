@@ -13,3 +13,6 @@
     - [Git 环境](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/built_git_env.md)
     - [添加依赖 & 搭建 Egg 骨架](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/add_dependence.md)
     - [数据库设计](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/db.md)
+- 壹 API & Router 整理
+    - [API](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/API.md)
+    - [Router](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/Frontend.md)
