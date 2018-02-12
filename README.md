@@ -16,3 +16,6 @@
 - 壹 API & Router 整理
     - [API](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/API.md)
     - [Router](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/Frontend.md)
+- 贰 Vue
+    - [环境搭建](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/env.md)
+    - [注册/登录](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/env.md)
