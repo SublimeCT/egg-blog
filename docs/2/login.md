@@ -189,8 +189,6 @@ export default {
 
 ```
 
-![效果图](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/images/bg.png)
-
 ## 设置路由形式
 用 `history.pushState` 取代锚点形式的 `path`  
 `src/router/index.js` [doc](https://router.vuejs.org/zh-cn/essentials/history-mode.html)
@@ -289,6 +287,8 @@ export default {
 }
 </style>
 ```
+
+![效果图](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/images/login.png)
 
 ## 登录实现
 
