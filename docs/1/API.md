@@ -9,9 +9,8 @@ module.exports = app => {
     // test
     router.get('/test', controller.home.test)
     // restful API
-    router.resource('users', controller.user)
+    router.resource('settings', controller.user)
     router.resource('articles', controller.article)
-    router.resource('roles', controller.role)
 }
 ```
 
