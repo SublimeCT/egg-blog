@@ -3,10 +3,12 @@ module.exports = app => {
     // test
     router.get('/test', controller.home.test)
     // restful API
-    router.resource('users', controller.user)
-    router.resource('articles', controller.article)
-    router.resource('roles', controller.role)
+    router.resources('users', controller.user)
+    router.resources('articles', controller.article)
+    router.resources('settings', controller.setting)
     // frontend API
-    router.post('/user/regist', controller.user.regist) // 注册
-    router.post('/user/login', controller.user.login) // 登录
+    router.post('/api/login', controller.user.login) // 登录
+
+    // 首次请求接口时获取 csrf token
+    router.get('/api/getCsrfToken', controller.home.getCsrfToken)
 }

@@ -6,9 +6,12 @@
 
 ## 细节
 - 背景图选用百度壁纸
-- ~~使用 `vue-form-generator` 生成登录表单~~ 前台暂未加入表单
-- 使用 `history.pushState` 模式的路由 [doc](https://router.vuejs.org/zh-cn/essentials/history-mode.html) 
-- 使用 `sass`
+- ~~使用 `vue-form-generator` 生成登录表单~~
+- 使用 `history.pushState` 模式的路由 [文档](https://router.vuejs.org/zh-cn/essentials/history-mode.html) 
+- 使用 `sass` 编写样式
+- 使用 `vuelidate` 做表单验证 [文档](https://monterail.github.io/vuelidate/#sub-installation)
+- 使用 `axios` 作为请求库 [github](https://github.com/axios/axios)
+- 使用 `vue-cookie` 操作 `cookie`
 
 ## 设置路由
 打开(默认)路由文件 `src/router/index.js`, 按 `vue-router` 配置规则修改路由配置对象
@@ -23,6 +26,7 @@ import Login from '@/views/Login'
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -41,7 +45,7 @@ export default new Router({
                     component: Article
                 },
                 {
-                    path: '/backend/login',
+                    path: 'login',
                     name: '登录页',
                     component: Login
                 }
@@ -191,7 +195,7 @@ export default {
 
 ## 设置路由形式
 用 `history.pushState` 取代锚点形式的 `path`  
-`src/router/index.js` [doc](https://router.vuejs.org/zh-cn/essentials/history-mode.html)
+`src/router/index.js` [文档](https://router.vuejs.org/zh-cn/essentials/history-mode.html)
 ```javascript
 export default new Router({
     mode: 'history'
@@ -218,17 +222,6 @@ export default new Router({
         </form>
     </div>
 </template>
-
-<script>
-export default {
-    data () {
-        return {
-            username: '',
-            password: ''
-        }
-    }
-}
-</script>
 
 <style lang="scss" scoped>
 @mixin opacitySet () {
@@ -291,4 +284,210 @@ export default {
 ![效果图](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/images/login.png)
 
 ## 登录实现
+```bash
+➜  egg-blog git:(master) yarn add vuelidate axios vue-cookie
+``` 
 
+### 使用 vuelidate 插件
+- 必须使用 `v-model` 实现双向数据绑定
+- 通过监听 `this.$v` 判断是否验证通过
+
+### 创建全局配置文件
+```bash
+➜  egg-blog-front git:(master) ✗ code src/config/base.js
+```
+
+将相关请求参数分离到配置文件中
+```javascript
+const API = {
+    prefix: 'http://egg-blog.com/api'
+}
+
+export {
+    API
+}
+```
+
+由于 `/` 路径未经过 `egg` 框架路由, 就无法生成 `csrf token`, `POST` 请求需要先获取 `csrf token`, 所以增加了一个获取 `csrf token` 的 `API`  
+*app/router.js*
+```javascript
+module.exports = app => {
+    const {router, controller} = app
+    // test
+    router.get('/test', controller.home.test)
+    // restful API
+    router.resources('users', controller.user)
+    router.resources('articles', controller.article)
+    router.resources('settings', controller.setting)
+    // frontend API
+    router.post('/api/login', controller.user.login) // 登录
+
+    // 首次请求接口时获取 csrf token
+    router.get('/api/getCsrfToken', controller.home.getCsrfToken)
+}
+```
+
+*src/views/Login.vue* 完善登录页面
+```html
+<template>
+    <div id="Login">
+        <form action="/api/login" method="post" @submit="login" autocomplete="off">
+            <label for="username">
+                <div class="fieldName">Username</div>
+                <input type="text" id="username" name="username" v-model.trim="username" tabindex="1">
+            </label>
+            <label for="password">
+                <div class="fieldName">Password</div>
+                <input type="password" id="password" name="password" v-model.trim="password" tabindex="2">
+            </label>
+            <label class="button-box">
+                <button tabindex="3">Login</button>
+            </label>
+        </form>
+        <pre>{{ $v.username }}</pre>
+        <pre>{{ $v.password }}</pre>
+    </div>
+</template>
+
+<script>
+import { minLength, required } from 'vuelidate/lib/validators'
+import { API } from '@/config/base'
+import axios from 'axios'
+
+const vagueProperties = [
+    '-webkit-filter',
+    '-moz-filter',
+    '-o-filter',
+    '-ms-filter',
+    'filter'
+]
+
+export default {
+    validations: {
+        username: {
+            required,
+            minLength: minLength(4)
+        },
+        password: {
+            required,
+            minLength: minLength(6)
+        }
+    },
+    data () {
+        return {
+            username: '',
+            password: ''
+        }
+    },
+    methods: {
+        login (event) {
+            if (this.$v.username.$invalid || this.$v.password.$invalid) {
+                this.addVague()
+            } else {
+                // this.disableSubmit()
+                this.sendLogin()
+            }
+            event.preventDefault()
+        },
+        addVague () {
+            const num = Math.floor(Math.random() * 7 + 1)
+            vagueProperties.forEach(property => {
+                document.body.style[property] = `blur(${num}px)`
+            })
+        },
+        sendLogin () {
+            const {username, password} = this
+            this.getCsrfCookie().then(token => {
+                axios.request({
+                    method: 'POST',
+                    baseURL: API.prefix,
+                    url: '/login',
+                    data: {username, password},
+                    headers: {'X-CSRF-TOKEN': token}
+                }).then(res => {
+                    console.warn(res)
+                })
+            })
+        },
+        getCsrfCookie () {
+            return new Promise((resolve, reject) => {
+                const csrfToken = this.$cookie.get('csrfToken')
+                if (!csrfToken) {
+                    axios.request({
+                        method: 'GET',
+                        baseURL: API.prefix,
+                        url: 'getCsrfToken'
+                    }).then(res => {
+                        resolve(this.$cookie.get('csrfToken'))
+                    })
+                } else {
+                    resolve(csrfToken)
+                }
+            })
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+@mixin opacitySet () {
+    opacity: 0.4;
+    &:focus {
+        opacity: 0.66;
+    }
+    outline: none;
+}
+#Login {
+    form {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;        
+        margin: 150px auto;
+        max-width: 450px;
+        label {
+            display: block;
+            margin-bottom: 30px;
+            .fieldName {
+                letter-spacing: 1px;                
+                margin-left: 20px;
+                font-size: 18px;
+                padding-bottom: 10px;
+                color: white;
+                text-shadow: 1px 1px 2px #F9D, 0 0 3em #222, 0 0 0.2em #0D3;
+            }
+            input {
+                @include opacitySet;
+                font-size: 16px;
+                border-radius: 18px;
+                letter-spacing: 1px;
+                padding-left: 23px;
+                padding-right: 23px;
+                width: 360px;
+                box-shadow: none;
+                height: 33px;
+                border-style: none;
+            }
+        }
+        .button-box {
+            margin-top: 45px;
+            width: 400px;
+            text-align: center;
+            button {
+                @include opacitySet;                
+                opacity: 0.4;
+                width: 150px;
+                height: 35px;
+                margin: 0 auto;
+                font-size: 18px;
+                border-radius: 15px;
+                padding: 5px;
+                border-style: none;
+            }
+        }
+    }
+    pre {
+        color: red;
+        float: left;
+    }
+}
+</style>
+
+```

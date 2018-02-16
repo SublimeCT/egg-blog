@@ -1,4 +1,4 @@
-const { Controller } = require('egg').Controller
+const { Controller } = require('egg')
 
 class ArticleController extends Controller {
     async index () {}

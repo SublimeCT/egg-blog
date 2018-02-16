@@ -1,4 +1,4 @@
-const { Controller } = require('egg').Controller
+const { Controller } = require('egg')
 
 class UserController extends Controller {
     async index () {}
@@ -14,6 +14,10 @@ class UserController extends Controller {
     async update () {}
 
     async destroy () {}
+
+    async login () {
+        this.ctx.body = new Date()
+    }
 }
 
 module.exports = UserController

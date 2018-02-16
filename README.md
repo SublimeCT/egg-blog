@@ -39,4 +39,4 @@
 - 贰 Vue 前台
     - [环境搭建](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/env.md)
     - [eslint 配置](https://github.com/SublimeCT/note/blob/master/JS/NodeJs/Note_doc/eslint.mds) (这是我的另一个笔记)
-    - [登录页面](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login.md)
+    - [登录页面(前端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login.md)
