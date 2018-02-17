@@ -19,14 +19,14 @@
 ### backend
 - `/login` 登录[登录成功跳转到后台]  
     - `/api/login` 登录请求
-- `/articles` 文章管理页
-    - [PATCH]`/article/:id` 修改文章信息
-    - [POST]`/article` 创建文章
-    - [DELETE]`/article/:id` 删除文章
-- `/settings` 设置页
-    - [PATCH]`/settings/:id` 修改设置 
-    - [POST]`/settings` 创建设置项
-    - [DELETE]`/settings/:id` 删除设置项
+- `/backend/articles` 文章管理页
+    - [PATCH]`/api/article/:id` 修改文章信息
+    - [POST]`/api/article` 创建文章
+    - [DELETE]`/api/article/:id` 删除文章
+- `/backend/settings` 设置页
+    - [PATCH]`/api/setting/:id` 修改设置 
+    - [POST]`/api/setting` 创建设置项
+    - [DELETE]`/api/setting/:id` 删除设置项
 
 ## Notes
 - 零 项目初始化
@@ -40,3 +40,6 @@
     - [环境搭建](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/env.md)
     - [eslint 配置](https://github.com/SublimeCT/note/blob/master/JS/NodeJs/Note_doc/eslint.mds) (这是我的另一个笔记)
     - [登录页面(前端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login.md)
+    - [登录页面(后端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login-backend.md)
+- 叁 管理后台
+    - [新增文章](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/publish_article.md)

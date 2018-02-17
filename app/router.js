@@ -11,4 +11,6 @@ module.exports = app => {
 
     // 首次请求接口时获取 csrf token
     router.get('/api/getCsrfToken', controller.home.getCsrfToken)
+    // 检测是否登录
+    router.get('/api/checkLogin', controller.user.checkLogin)
 }

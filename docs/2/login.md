@@ -18,10 +18,16 @@
 ```javascript
 import Vue from 'vue'
 import Router from 'vue-router'
+// page-front
 import Index from '@/views/Index'
 import Articles from '@/views/article/Articles'
 import Article from '@/views/article/Article'
 import Login from '@/views/Login'
+// page-backend
+import BackendIndex from '@/views/backend/Index'
+import PublishArticles from '@/views/backend/Articles'
+import ModifyArticle from '@/views/backend/ModifyArticle'
+import Settings from '@/views/backend/Settings'
 
 Vue.use(Router)
 
@@ -45,9 +51,31 @@ export default new Router({
                     component: Article
                 },
                 {
-                    path: 'login',
+                    path: '/login',
                     name: '登录页',
                     component: Login
+                },
+                {
+                    path: '/backend',
+                    name: '后台',
+                    component: BackendIndex,
+                    children: [
+                        {
+                            path: '/backend/articles',
+                            name: '文章发布页',
+                            component: PublishArticles
+                        },
+                        {
+                            path: '/backend/article/:id',
+                            name: '文章修改页',
+                            component: ModifyArticle
+                        },
+                        {
+                            path: '/backend/settings',
+                            name: '系统设置页',
+                            component: Settings                            
+                        }
+                    ]
                 }
             ]
         }
@@ -56,12 +84,13 @@ export default new Router({
 
 ```
 
-## 创建 vue 文件
+## 创建所有 router 中的 vue 文件
 ```bash
 ➜  egg-blog-front git:(master) ✗ code src/views/article/Articles.vue src/views/article/Article.vue src/views/Login.vue src/views/Index.vue
+➜  egg-blog-front git:(master) ✗ code src/views/backend/Index.vue src/views/backend/Articles.vue src/views/backend/ModifyArticle.vue src/views/backend/Settings.vue
 ```
 
-### 开始填充路由页面  
+### 开始填充路由页面
 `src/views/Index.vue`, 其他页面相同
 ```html
 <template>
@@ -202,6 +231,33 @@ export default new Router({
 }
 ```
 
+### nginx 配置
+```profile
+server {
+	listen 		80;
+	server_name 	egg-blog.com;
+    # 这里映射到了 vue 默认 build 目录
+	root		/home/xxx/projects/egg-blog-front/dist;
+	index		index.html index.htm;
+
+	# 所有 /api 路由指向后台
+	location ^~ /api/ {
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host  $http_host;
+		proxy_set_header X-Nginx-Proxy true;
+		proxy_set_header Connection "";
+		proxy_pass      http://127.0.0.1:7001;
+	}
+	
+    # 主要是配置这里
+	location / {
+		root /home/xxx/projects/egg-blog-front/dist; 
+		try_files $uri $uri/ /index.html =404;
+	}
+}
+```
+
 ## 登录页样式
 *Login.vue*
 ```html
@@ -284,6 +340,7 @@ export default new Router({
 ![效果图](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/images/login.png)
 
 ## 登录实现
+### 安装依赖
 ```bash
 ➜  egg-blog git:(master) yarn add vuelidate axios vue-cookie
 ``` 
@@ -297,7 +354,7 @@ export default new Router({
 ➜  egg-blog-front git:(master) ✗ code src/config/base.js
 ```
 
-将相关请求参数分离到配置文件中
+将请求参数分离到配置文件中
 ```javascript
 const API = {
     prefix: 'http://egg-blog.com/api'
@@ -344,8 +401,6 @@ module.exports = app => {
                 <button tabindex="3">Login</button>
             </label>
         </form>
-        <pre>{{ $v.username }}</pre>
-        <pre>{{ $v.password }}</pre>
     </div>
 </template>
 
@@ -405,7 +460,11 @@ export default {
                     data: {username, password},
                     headers: {'X-CSRF-TOKEN': token}
                 }).then(res => {
-                    console.warn(res)
+                    if (res.code === '0') {
+                        this.$route.push({ path: '/backend/articles' })
+                    } else {
+                        alert(res.message)
+                    }
                 })
             })
         },
