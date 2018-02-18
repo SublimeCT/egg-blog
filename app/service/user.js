@@ -31,9 +31,7 @@ const userModel = mongoose.model('User', userSchema)
 
 class UserService extends Service {
     async checkUser (condition) {
-        console.log('condition', condition)
         const userInfo = await userModel.checkUser(condition)
-        console.log('userInfo', userInfo)
         if (userInfo) {
             this.ctx.session.userid = userInfo._id
         }

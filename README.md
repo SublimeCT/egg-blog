@@ -42,4 +42,5 @@
     - [登录页面(前端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login.md)
     - [登录页面(后端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login-backend.md)
 - 叁 管理后台
+    - [登录验证](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/login_check.md)
     - [新增文章](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/publish_article.md)
