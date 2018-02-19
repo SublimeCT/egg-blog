@@ -1,5 +1,12 @@
 # egg-blog
 
+## 简介
+- 一个简单的 ***单用户*** 博客
+- 前后端分开部署
+- 前台提供文章列表 & 文章详情
+- 后台提供文章 & 系统设置增删改查
+- 只考虑 `PC` 端
+
 ## 开发环境
 - `Deepin` 15.5 unstable
 - `vscode` 1.19.2
@@ -43,4 +50,5 @@
     - [登录页面(后端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login-backend.md)
 - 叁 管理后台
     - [登录验证](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/login_check.md)
+    - [文章列表](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/article_list.md)
     - [新增文章](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/publish_article.md)

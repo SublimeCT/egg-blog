@@ -384,7 +384,7 @@ module.exports = app => {
 }
 ```
 
-*src/views/Login.vue* 完善登录页面
+*src/views/Login.vue* 完善登录页面  
 ```html
 <template>
     <div id="Login">

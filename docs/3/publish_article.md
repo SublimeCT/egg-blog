@@ -4,7 +4,9 @@
 - [vue-router 钩子](https://router.vuejs.org/zh-cn/advanced/navigation-guards.html)
 
 ## 细节
-- 登录后直接进入文章发布页
+- 分页
+    - 每页 15 条
+
 
 ## 初始化模板页
 ### 创建相关页面并填充(已创建时忽略)

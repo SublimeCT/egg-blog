@@ -18,6 +18,7 @@
     - create_time
     - modify_time
     - title
+    - image
 - Setting  
     - name
     - details

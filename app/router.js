@@ -3,9 +3,9 @@ module.exports = app => {
     // test
     router.get('/test', controller.home.test)
     // restful API
-    router.resources('users', controller.user)
-    router.resources('articles', controller.article)
-    router.resources('settings', controller.setting)
+    // router.resources('users', controller.user)
+    // router.resources('articles', controller.article)
+    // router.resources('settings', controller.setting)
     // frontend API
     router.post('/api/login', controller.user.login) // 登录
 
@@ -13,4 +13,7 @@ module.exports = app => {
     router.get('/api/getCsrfToken', controller.home.getCsrfToken)
     // 检测是否登录
     router.post('/api/checkLogin', controller.user.checkLogin)
+
+    // restful API
+    router.get('/api/articles', controller.article.list)
 }
