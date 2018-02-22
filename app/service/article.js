@@ -39,9 +39,12 @@ articleSchema.statics.getList = function ({condition, limit, skip, sort}) {
 const articleModel = mongoose.model('Article', articleSchema)
 
 class ArticleService extends Service {
-    async getList(options) {
+    async getList (options) {
         const articleInfo = await articleModel.getList(options)
         return articleInfo
+    }
+    async createArticle () {
+        return '12345'
     }
     async sha1(str) {
         if (typeof str !== 'string') throw new Error('not string')

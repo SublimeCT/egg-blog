@@ -15,5 +15,6 @@ module.exports = app => {
     router.post('/api/checkLogin', controller.user.checkLogin)
 
     // restful API
-    router.get('/api/articles', controller.article.list)
+    router.get('/api/articles', controller.article.list) // 文章列表
+    router.post('/api/articles', controller.article.create) // 文章列表
 }

@@ -5,7 +5,18 @@ class ArticleController extends Controller {
 
     async ['new'] () {}
 
-    async create () {}
+    async create () {
+        const { ctx, service } = this
+        const { title, content } = ctx.request.body
+        if (!title || !content) {
+            ctx.response._responseData.code = '2000'
+            ctx.response._sendJson()
+            return
+        }
+        const res = await service.article.createArticle()
+        ctx.response._responseData.data = res
+        ctx.response._sendJson()
+    }
 
     async show () {}
 
