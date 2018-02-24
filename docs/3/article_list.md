@@ -7,7 +7,8 @@
 - 使用表格组件 `v2-table`
 - 在访问后台时不加载随机背景图
 - ~~使用 `rubik` 作为 UI 框架~~
-- 使用 `N3-components` 作为 UI 框架 [文档](https://n3-components.github.io/N3-components/component.html)
+- ~~使用 `N3-components` 作为 UI 框架 [文档](https://n3-components.github.io/N3-components/component.html)~~ 文档不全 ...
+- 使用 `iview` 作为 UI 框架
 
 ## 随机背景图
 *src/App.vue*
