@@ -6,16 +6,36 @@ class ArticleController extends Controller {
     async ['new'] () {}
 
     async create () {
+        let resCode = '2001'
         const { ctx, service } = this
         const { title, content } = ctx.request.body
+        // 空字符过滤
         if (!title || !content) {
-            ctx.response._responseData.code = '2000'
-            ctx.response._sendJson()
+            resCode = '2000'
+            ctx.response._sendJson(resCode)
             return
         }
-        const res = await service.article.createArticle()
-        ctx.response._responseData.data = res
-        ctx.response._sendJson()
+        // TODO 字符长度过滤 ...
+        const data = { title, content }
+        /* 
+            { title: '111',
+            content: 'test',
+            create_time: 2018-02-24T00:53:39.831Z,
+            _id: 5a90b79353f13e8ddaab2591,
+            __v: 0 }
+        */
+        try {
+            const articleInfo = await service.article.createArticle(data)
+            if (articleInfo) {
+                resCode = '2003' // 创建成功
+                ctx.response._responseData.data = { id }
+            }
+        } catch (e) {
+            if (e.code === 11000) {
+                resCode = '2002' // 标题重复
+            }
+        }
+        ctx.response._sendJson(resCode)
     }
 
     async show () {}

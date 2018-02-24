@@ -15,20 +15,21 @@ class UserController extends Controller {
         // 将参数交给 service
         const userInfo = await this.ctx.service.user.checkUser({nickname, password})
         // 根据结果处理 response
-        console.log('code: ', this.ctx.response._responseData.code)
         if (!userInfo) {
-            this.ctx.response._responseData.code = '1001'
+            this.ctx.response._sendJson('1001')
+            return
         }
         // 以 json 格式返回
-        this.ctx.response._sendJson()
+        this.ctx.response._sendJson('0')
     }
     async checkLogin () {
-        if (!this.ctx.session.userid) {
-            this.ctx.response._responseData.code = '1000'
-        } else {
+        let resCode = '0'
+        if (this.ctx.session.userid) {
             this.ctx.response._responseData.data.isLogin = true
+        } else {
+            resCode = '1000'
         }
-        this.ctx.response._sendJson()
+        this.ctx.response._sendJson(resCode)
     }
 }
 

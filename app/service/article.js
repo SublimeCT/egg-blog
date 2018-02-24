@@ -35,6 +35,15 @@ articleSchema.statics.getList = function ({condition, limit, skip, sort}) {
         resolve(data)
     })
 }
+articleSchema.statics.createArticle = function (data) {
+    return new Promise((resolve, reject) => {
+        data.create_time = new Date()
+        this.create(data, (err, article) => {
+            if (err) reject(err)
+            resolve(article)
+        })
+    })
+}
 
 const articleModel = mongoose.model('Article', articleSchema)
 
@@ -43,8 +52,8 @@ class ArticleService extends Service {
         const articleInfo = await articleModel.getList(options)
         return articleInfo
     }
-    async createArticle () {
-        return '12345'
+    async createArticle (data) {
+        return await articleModel.createArticle(data)
     }
     async sha1(str) {
         if (typeof str !== 'string') throw new Error('not string')
