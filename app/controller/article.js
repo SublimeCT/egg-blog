@@ -28,7 +28,7 @@ class ArticleController extends Controller {
             const articleInfo = await service.article.createArticle(data)
             if (articleInfo) {
                 resCode = '2003' // 创建成功
-                ctx.response._responseData.data = { id }
+                ctx.response._responseData.data = { id: articleInfo._id }
             }
         } catch (e) {
             if (e.code === 11000) {
