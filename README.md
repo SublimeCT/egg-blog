@@ -2,7 +2,7 @@
 
 ## 简介
 - 一个简单的 ***单用户*** 博客
-- **前后端分开部署**, 前端项目[仓库](https://github.com/SublimeCT/egg-blog-front)
+- **前后端分开部署**, 前端项目在 [这个](https://github.com/SublimeCT/egg-blog-front) 仓库
 - 前台提供文章列表 & 文章详情
 - 后台提供文章 & 系统设置增删改查
 - 只考虑 `PC` 端
@@ -37,18 +37,18 @@
 
 ## Notes
 - 零 项目初始化
-    - [Git 环境](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/built_git_env.md)
-    - [添加依赖 & 搭建 Egg 骨架](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/add_dependence.md)
-    - [数据库设计](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/0/db.md)
+    - [Git 环境](https://github.com/SublimeCT/egg-blog/blob/master/docs/0/built_git_env.md)
+    - [添加依赖 & 搭建 Egg 骨架](https://github.com/SublimeCT/egg-blog/blob/master/docs/0/add_dependence.md)
+    - [数据库设计](https://github.com/SublimeCT/egg-blog/blob/master/docs/0/db.md)
 - 壹 API & Router 整理
-    - [API](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/API.md)
-    - [Router](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/1/Frontend.md)
+    - [API](https://github.com/SublimeCT/egg-blog/blob/master/docs/1/API.md)
+    - [Router](https://github.com/SublimeCT/egg-blog/blob/master/docs/1/Frontend.md)
 - 贰 Vue 前台
-    - [环境搭建](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/env.md)
-    - [eslint 配置](https://github.com/SublimeCT/note/blob/master/JS/NodeJs/Note_doc/eslint.mds) (这是我的另一个笔记)
-    - [登录页面(前端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login.md)
-    - [登录页面(后端)](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/2/login-backend.md)
+    - [环境搭建](https://github.com/SublimeCT/egg-blog/blob/master/docs/2/env.md)
+    - [eslint 配置](https://github.com/SublimeCT/note/blob/master/JS/NodeJs/Note_doc/eslint.md) (这是我的另一个笔记)
+    - [登录页面(前端)](https://github.com/SublimeCT/egg-blog/blob/master/docs/2/login.md)
+    - [登录页面(后端)](https://github.com/SublimeCT/egg-blog/blob/master/docs/2/login-backend.md)
 - 叁 管理后台
-    - [登录验证](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/login_check.md)
-    - [文章列表](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/article_list.md)
-    - [新增文章](https://coding.net/u/sublimeCT/p/egg-blog/git/blob/master/docs/3/publish_article.md)
+    - [登录验证](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/login_check.md)
+    - [文章列表](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/article_list.md)
+    - [新增文章](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/publish_article.md)
