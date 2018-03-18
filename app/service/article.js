@@ -15,6 +15,10 @@ const articleSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    tegs: {
+        type: Array,
+        required: true
+    },
     image: String,
     create_time: Date,
     modify_time: Date
@@ -23,9 +27,9 @@ const articleSchema = new mongoose.Schema({
 })
 
 articleSchema.statics.fields = {}
-articleSchema.statics.getList = function ({condition, limit, skip, sort}) {
+articleSchema.statics.getList = function ({condition, limit, skip, sort, fields = null}) {
     return new Promise(resolve => {
-        const data = this.find(condition, (err, articleData) => {
+        const data = this.find(condition, fields, (err, articleData) => {
             if (err) throw err
             resolve(articleData)
         })

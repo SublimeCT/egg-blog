@@ -5,8 +5,10 @@
  */
 module.exports = options => {
     return async function (ctx, next) {
-        const resCode = '0'
-        if (ctx.path.indexOf('/api/') === 0) {
+        let resCode = '0'
+        // /api/front 为前台 /api/ 为后台
+        if (ctx.path.indexOf('/api/') === 0 &&
+            ctx.path.indexOf('/api/front') === -1) {
             if (!ctx.session.userid) {
                 resCode = '1000'
             } else {

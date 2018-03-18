@@ -52,3 +52,6 @@
     - [登录验证](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/login_check.md)
     - [文章列表](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/article_list.md)
     - [新增文章](https://github.com/SublimeCT/egg-blog/blob/master/docs/3/publish_article.md)
+- 四 主页
+    - [主页(后台)](https://github.com/SublimeCT/egg-blog/blob/master/docs/4/index_backend.md)
+    - [主页(前台)](https://github.com/SublimeCT/egg-blog/blob/master/docs/4/index_frontend.md)

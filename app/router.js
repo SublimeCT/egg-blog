@@ -14,7 +14,11 @@ module.exports = app => {
     // 检测是否登录
     router.post('/api/checkLogin', controller.user.checkLogin)
 
-    // restful API
+    // backend API
     router.get('/api/articles', controller.article.list) // 文章列表
-    router.post('/api/articles', controller.article.create) // 文章列表
+    router.post('/api/articles', controller.article.create) // 创建文章
+
+    // front API
+    router.get('/api/front/articles', controller.article.frontList) // 文章列表
+
 }

@@ -47,14 +47,39 @@ class ArticleController extends Controller {
     async destroy () {}
 
     async list () {
+        const {service, ctx, config} = this
+        const skip = this._getSkip()
         const options = {
             condition: {},
-            limit: 10,
-            skip: 0,
+            limit: config.api.article.PAGE_SIZE,
+            skip,
             sort: {create_time: -1}
         }
-        const list = await this.service.article.getList(options)
-        this.ctx.body = list
+        const list = await service.article.getList(options)
+        ctx.body = list
+    }
+
+    async frontList () {
+        const {service, ctx, config} = this
+        const skip = this._getSkip()
+        const fields = ['title', 'tags', 'create_time', 'modify_time']
+        const options = {
+            condition: {},
+            limit: config.api.article.PAGE_SIZE,
+            skip,
+            sort: {create_time: -1},
+            fields
+        }
+        const list = await service.article.getList(options)
+        ctx.body = list
+    }
+
+    _getSkip () {
+        const intValue = parseInt(this.ctx.query.page)
+        if (isNaN(intValue) || intValue <= 0) {
+            return 0
+        }
+        return (intValue - 1) * this.config.api.article.PAGE_SIZE
     }
 }
 
