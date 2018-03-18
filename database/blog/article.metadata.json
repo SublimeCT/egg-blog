@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"blog.article"},{"v":2,"unique":true,"key":{"title":1},"name":"title_1","ns":"blog.article","background":true}],"uuid":"3b626e2219124c9c9861678a4d012e27"}
